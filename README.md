@@ -1,2 +1,5 @@
-# lenovo_smart_handover
-lenovo_smart_handover
+# qa-doc-web
+Qa Doc Web App
+  /*"> 1%",
+    "last 2 versions",
+    "not dead"*/ 

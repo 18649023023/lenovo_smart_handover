@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>天津港统一身份认证平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="@resourceServerDomain@/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="@resourceServerDomain@/static/css/custom-page-style.css">
+    <style>
+        /*
+            在这里写自定义样式
+
+            */
+        .login-page .login-bg {
+            background-repeat: no-repeat;
+            background-size: cover;
+            /*background-image:url( '/static/images/bg.jpg');*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="login-bg"></div>
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <div class="box-lang clearfix">
+                        <a class="box-lang-current lang-zh" href="javascript:"></a>
+                        <ul class="list-unstyled list-lang">
+                            <li class="">
+                                <a class="login-con-lang lang-en lang-en_US" href="javascript:void(0);"
+                                    language="en"><span class="name">English</span></a>
+                            </li>
+                            <li class="hide">
+                                <a class="login-con-lang lang-zh lang-zh_CN" href="javascript:void(0);"
+                                    language="zh"><span class="name">中文</span></a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+                    <span class="icon-bg active">
+                        <img src="" id="qrIcon">
+                    </span>
+                    <span class="icon-bg ">
+                        <img src="" id="upIcon">
+                    </span>
+                    <span class="change-logintype active" word-key="qrTips"></span>
+                    <span class="change-logintype " word-key="upTips"></span>
+                </div>
+                <div class="login-logo text-center">
+                    <img src="" id="enterpriseLogo" alt="">
+                    <p class="comp-name" id="enterpriseName"></p>
+                </div>
+                <div class="login-body">
+
+                    <!--            //账户密码登录方式-->
+                    <div class="login-type active">
+                        <form onsubmit="return false;" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="username" word-key="userNamePlaceholder"
+                                    placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" word-key="passwordPlaceholder"
+                                    placeholder="">
+                            </div>
+                            <div class="form-group code-group" id="captchaItem">
+                                <input type="text" class="form-control" id="captcha" word-key="captchaPlaceholder"
+                                    placeholder="">
+                                <span class="input-group-addon">
+                                    <img src="" alt="" id="captchaImg">
+                                </span>
+                            </div>
+                            <p class="forget-password text-right"><a href="javascript:void(0)" word-key="forgetPassword"
+                                    id="forgetPassword"></a></p>
+                            <div class="form-group">
+                                <button type="submit" id="btnLogin" class="btn btn-primary btn-block"
+                                    word-key="loginBtn">
+                                    登录
+                                </button>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                    <!--            //扫码登录-->
+                    <div class="login-type">
+                        <div class="qr-box border">
+                            <div class="mask-content">
+                                <div class="mask bgfff"></div>
+                                <div class="mask-p">
+                                    <p><span word-key="scanOverTime">扫码超时</span></p>
+                                    <p><span word-key="overTimePlease">请</span><a href="javascript:void(0);"
+                                            onclick="scanAgain"><span word-key="overTimeRefresh">刷新</span></a><span
+                                            word-key="overTimeTry">后重试</span></p>
+                                </div>
+                                <div class="mask-body">
+                                    <img id="qrImg" />
+                                </div>
+                            </div>
+                            <p word-key="qrAppTips"></p>
+                            <p word-key="qrNoAppTips"></p>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="register" class="btn btn-default btn-block" word-key="siginBtn">
+                        </button>
+                    </div>
+                    <div class="third-auth-login">
+                        <div class="text-dirvider"><span class="divider-inner-text" word-key="authListTip"></span></div>
+
+                        <ul class="auth-list" id="authList">
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="@resourceServerDomain@/static/js/jquery.min.js"></script>
+<script src="@resourceServerDomain@/static/js/jquery.cookie.js"></script>
+<script src="@resourceServerDomain@/static/bootstrap/js/bootstrap.js"></script>
+<script src="@resourceServerDomain@/static/js/idaas-custom-login.js"></script>
+
+<script>
+    window.onload = function () {
+        var isShowCaptcha = true
+        var IDaaSLogin = new Weblogin({
+            baseUrl: "@baseUrl@",
+            client_id: "@client_id@",
+            enterpriseId: '@enterpriseId@',
+            apiVersion: "@apiVersion@",
+            pageWords: [
+                {
+                    key: "qrTips",
+                    zh: "扫码登录更便捷",
+                    en: "Scan QR code to log on",
+                },
+                {
+                    key: "upTips",
+                    zh: "使用账号登录",
+                    en: "Enter account information to log on.",
+                }, {
+                    key: "userNamePlaceholder",
+                    zh: "请输入用户名、邮箱、手机号",
+                    en: "Enter a username, email, or phoneNumber",
+                }, {
+                    key: "passwordPlaceholder",
+                    zh: "请输入密码",
+                    en: "Enter the password",
+                }, {
+                    key: "captchaPlaceholder",
+                    zh: "请输入验证码",
+                    en: "Enter the captcha code",
+                }, {
+                    key: "forgetPassword",
+                    zh: "忘记密码",
+                    en: "Forgot password",
+                }, {
+                    key: "loginBtn",
+                    zh: "登录",
+                    en: "Log On",
+                }, {
+                    key: "siginBtn",
+                    zh: "注册",
+                    en: "Sign Up",
+                }, {
+                    key: "authListTip",
+                    zh: "第三方认证登录",
+                    en: "Use a Third-party Account to Log On",
+                }, {
+                    key: "qrAppTips",
+                    zh: "打开移动端APP，使用扫一扫登录",
+                    en: "Open the IDaaS app on your mobile terminal, and scan the QR code to log on.",
+                },
+                {
+                    key: "qrNoAppTips",
+                    zh: "还未下载移动端APP？请联系管理员",
+                    en: "If you have not downloaded the app, contact the administrator.",
+                }
+
+
+            ]
+        })
+        //初始化页面
+        function initPage() {
+            // 获取默认图标，非必需，可引用外部图标
+            $('#qrIcon').attr('src', IDaaSLogin.qrLoginBg());
+            $('#upIcon').attr('src', IDaaSLogin.upLoginBg());
+
+            //获取页面当前语言
+            // var language = IDaaSLogin.getCurrentLanguage()
+            // console.log(language)
+
+            //获取公司信息 logo name等进行展示
+            IDaaSLogin.getEnterpriseInfo(function (data) {
+                $('#enterpriseLogo').attr('src', 'data:image/gif;base64,' + data.logo);
+                $('#enterpriseName').html(data.fullName);
+            });
+
+            //获取公司认证源列表进行渲染，渲染到id为authList的ul中
+            IDaaSLogin.getAdapters(function (data) {
+                if (!data) {
+                    console.error("获取认证源信息失败")
+                    return false
+                }
+
+                //若sp发起应用安全等级高于5
+                if (data.appSecurityLevel && data.appSecurityLevel > 5) {
+                    //需要隐藏扫码登录和U_P登录方式
+                    $('.login-type').hide()
+                    $('.icon-bg').hide()
+                    $('.change-logintype').hide()
+                    $('#register').hide()
+                    $('.divider-inner-text').html("下面是与应用匹配的认证方式")
+                } else {
+                    getCaptcha();
+                    initQRcode();
+                    showCaptcha();
+                    //渲染各种登录方式
+                    if (IDaaSLogin.getQueryName('loginType') == 'qr') {
+                        toggleLoginType()
+                    }
+                }
+            }, "#authList");
+        }
+
+        function getCaptcha() {
+            IDaaSLogin.getCaptcha(function (captcha) {
+                $('#captchaImg').attr('src', 'data:image/gif;base64,' + captcha.captcha);
+            });
+
+        }
+
+        function showCaptcha() {
+            IDaaSLogin.getShowCaptcha(function (result) {
+                isShowCaptcha = result.showCaptcha
+                if (result && result.showCaptcha) {
+                    $("#captchaItem").show()
+                } else if (result && !result.showCaptcha) {
+                    $("#captchaItem").hide()
+                } else {
+                    $("#captchaItem").show()
+                }
+            });
+            // $("#captchaItem")
+        }
+        function login() {
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var captcha = $('#captcha').val();
+            if (username == '') {
+                IDaaSLogin.errorTips("用户名不能为空")
+            } else if (password == '') {
+                IDaaSLogin.errorTips("密码不能为空")
+            } else if (isShowCaptcha && captcha == '') {
+                IDaaSLogin.errorTips("验证码不能为空")
+            }
+            IDaaSLogin.signupAndLogin({
+                username: username,
+                password: password,
+                captcha: captcha
+            }, function (err) {
+                //登录错误回调函数，处理自动刷新验证码并重新获取展示验证码控制接口
+                err && (getCaptcha(), showCaptcha())
+            });
+
+        }
+
+        // 刷新二维码
+        function scanAgain() {
+            initQRcode();
+        }
+
+        //初始化扫码登录
+        function initQRcode() {
+            IDaaSLogin.getQRCode(function (qrImg) {
+                $('#qrImg').attr('src', qrImg);
+            }, function () {
+                $('.mask-p').css({ "display": "flex" });
+                $('.mask').show();
+            });
+        }
+        //切换认证方式
+
+        function toggleLoginType() {
+            $('.icon-bg').toggleClass('active');
+            $('.change-logintype').toggleClass('active');
+            $('.login-type').toggleClass('active');
+        }
+
+        initPage();
+
+        //登录功能
+        $('#btnLogin').on('click', function () {
+            login();
+        });
+
+        //语言切换
+        $('.login-con-lang').on('click', function () {
+            IDaaSLogin.setCurrentLanguage($(this).attr('language'))
+        })
+        //忘记密码
+        $('#forgetPassword').on('click', function () {
+            IDaaSLogin.forgetPassword();
+        });
+        //注册功能
+        $('#register').on('click', function (e) {
+            e.preventDefault()
+            IDaaSLogin.register();
+        });
+        //刷新图片验证码
+        $('#captchaImg').on('click', function () {
+            getCaptcha();
+        });
+        //切换登录方式
+        $('.icon-bg').on('click', function () {
+            toggleLoginType()
+        });
+
+    }
+
+</script>
+
+</html>

@@ -14,7 +14,7 @@
       v-show="loading"
     >
       <van-loading size="50" color="#7EB9F7" vertical
-      ><span style="font-size: 20px">Loading...</span></van-loading
+        ><span style="font-size: 20px">Loading...</span></van-loading
       >
     </div>
     <div style="width: 100%; position: sticky; z-index: 2; top: 0">
@@ -397,7 +397,7 @@
                     Detail: formitem.HwJb.ProductRank.Detail,
                   })
                 "
-              >&#xe73b;</span
+                >&#xe73b;</span
               >
             </div>
             <div class="itemtitle">2、话务排名情况</div>
@@ -420,7 +420,7 @@
                     Detail: formitem.HwJb.ProblemRank.Detail,
                   })
                 "
-              >&#xe73b;</span
+                >&#xe73b;</span
               >
             </div>
             <div class="itemtitle">3、问题排名情况</div>
@@ -474,7 +474,7 @@
                     Detail: formitem.GdJb.AcceptGd.Detail,
                   })
                 "
-              >&#xe73b;</span
+                >&#xe73b;</span
               >
             </div>
             <div class="itemtitle">2、受理类工单</div>
@@ -497,7 +497,7 @@
                     Detail: formitem.GdJb.ManageGd.Detail,
                   })
                 "
-              >&#xe73b;</span
+                >&#xe73b;</span
               >
             </div>
             <div class="itemtitle">3、管理类工单</div>
@@ -778,7 +778,7 @@
                     formitem.MarketingJb.Provision.Content
                   )
                 "
-              >&#xe73b;</span
+                >&#xe73b;</span
               >
             </div>
             <div class="itemtitle">3、供应商</div>
@@ -809,7 +809,7 @@
                     Detail: formitem.ProjectJb.Detail,
                   })
                 "
-              >&#xe73b;</span
+                >&#xe73b;</span
               >
             </div>
           </div>
@@ -846,7 +846,7 @@
                     formitem.LtemList.GeneralView.Content
                   )
                 "
-              >&#xe73b;</span
+                >&#xe73b;</span
               >
             </div>
             <div class="itemtitle keyzl">1、总览</div>
@@ -870,7 +870,7 @@
                     Detail: formitem.LtemList.DepartmentPropel.Detail,
                   })
                 "
-              >&#xe73b;</span
+                >&#xe73b;</span
               >
             </div>
             <div class="itemtitle keybm">2、部门推进情况</div>
@@ -878,9 +878,9 @@
               {{
                 formitem.LtemList.DepartmentPropel.Content
                   ? formitem.LtemList.DepartmentPropel.Content.replace(
-                    /^\n+/,
-                    ""
-                  )
+                      /^\n+/,
+                      ""
+                    )
                   : nodata
               }}
             </span>
@@ -1362,7 +1362,9 @@
       <!--      </audio>-->
       <div class="playlist">
         <!-- 播放列表 -->
-        <span class="icon iconfont list" @click="() => (audiolistshow = true)">&#xea82;</span>
+        <span class="icon iconfont list" @click="() => (audiolistshow = true)"
+          >&#xea82;</span
+        >
 
         <!-- 播放按钮 -->
         <span class="playeven">
@@ -1372,7 +1374,9 @@
             content="重新请求语音信息"
             placement="top-start"
           >
-            <span class="icon iconfont refresh" @click="getVoiceContentText">&#xe620;</span>
+            <span class="icon iconfont refresh" @click="getVoiceContentText"
+              >&#xe620;</span
+            >
           </el-tooltip>
           <!-- 上一个 -->
           <!-- <span
@@ -1384,8 +1388,12 @@
           > -->
           <span v-if="audiourl">
             <!-- 播放/暂停 -->
-            <span class="icon iconfont playbtn" v-if="!isplay" @click="playbtn">&#xe87c;</span>
-            <span class="icon iconfont playbtn" v-else @click="playbtn">&#xe616;</span>
+            <span class="icon iconfont playbtn" v-if="!isplay" @click="playbtn"
+              >&#xe87c;</span
+            >
+            <span class="icon iconfont playbtn" v-else @click="playbtn"
+              >&#xe616;</span
+            >
           </span>
           <!-- 无播放 -->
           <span class="icon iconfont playbtnno" v-else>&#xe87c;</span>
@@ -1461,7 +1469,7 @@ import * as dd from "dingtalk-jsapi";
 export default {
   components: {
     Navbar,
-    audioPlayer
+    // audioPlayer,
   },
   setup() {
     const ttsRecorder = new TTSRecorder();
@@ -1529,14 +1537,14 @@ export default {
         { name: "工作安排", url: "", content: "", keyword: "gzap" },
         { name: "其它部门上报", url: "", content: "", keyword: "qtbmsb" },
         { name: "未完成事件", url: "", content: "", keyword: "wwcsj" },
-        { name: "计划事件", url: "", content: "", keyword: "jhsj" }
+        { name: "计划事件", url: "", content: "", keyword: "jhsj" },
       ],
       audiourl: "",
       selectname: null,
       parentisactive: false,
       todays: null,
       isScroll: false,
-      token: null
+      token: null,
       // audiourlList: [],
     });
     let hwCharts = null,
@@ -1545,12 +1553,12 @@ export default {
     onMounted(() => {
       dd.biz.navigation.hideBar({
         hidden: true, // true：隐藏，false：显示
-        onSuccess: function(result) {
+        onSuccess: function (result) {
           // console.log(result, "result");
         },
-        onFail: function(err) {
+        onFail: function (err) {
           // console.log(err, "err");
-        }
+        },
       });
 
       let date = new Date();
@@ -1577,8 +1585,7 @@ export default {
       getGDChartData();
     });
 
-    const handleBeforePlay = (next) => {
-    };
+    // const handleBeforePlay = (next) => {};
 
     // 获取token状态
     const refreshToken = () => {
@@ -1587,7 +1594,7 @@ export default {
           .post("OAuth2/accessToken", {
             // .post(tokenURL, {
             appKey: "LKRPC01",
-            appSecret: "IIxbtPWazRSDRMpzpbDWxDwdTqaelOhc"
+            appSecret: "IIxbtPWazRSDRMpzpbDWxDwdTqaelOhc",
           })
           .then((res) => {
             // console.log("刷新token", res);
@@ -1671,9 +1678,9 @@ export default {
           `FWDApex/znjbNew/getContentAndDetaillByDate?pdate=${data.selectdate}`,
           {
             headers: {
-              Authorization: `Bearer ${data.token}`
+              Authorization: `Bearer ${data.token}`,
             },
-            withCredentials: false
+            withCredentials: false,
           }
         )
         .then((res) => {
@@ -1820,7 +1827,7 @@ export default {
         element.scrollIntoView({
           behavior: "smooth",
           block: "nearest",
-          inline: "start"
+          inline: "start",
         });
       }
     };
@@ -1837,7 +1844,7 @@ export default {
       // scrollTop获取容器当前的垂直滚动位置
 
       const parentScrollTop = scrollContainer.value.scrollTop;
-      
+
       // 遍历所有子节点进行滚动定位
       for (let section of scrollContainer.value.children) {
         if (section) {
@@ -1890,7 +1897,7 @@ export default {
         // window.location.hash = `#${t}`;
         scrollableContainer.scroll({
           top: element.offsetTop, // 计算相对于容器顶部的偏移量
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }
     };
@@ -1919,8 +1926,8 @@ export default {
           smooth: true,
           data: [...data.chardata1],
           itemStyle: {
-            color: "#3F76C6"
-          }
+            color: "#3F76C6",
+          },
         },
         {
           name: "同期基数",
@@ -1928,30 +1935,30 @@ export default {
           smooth: true,
           data: [...data.chardata2],
           itemStyle: {
-            color: "#AB1B49"
-          }
-        }
+            color: "#AB1B49",
+          },
+        },
       ];
 
       const options = {
         tooltip: {
-          trigger: "item"
+          trigger: "item",
         },
         legend: {
           show: true,
           orient: "horizontal",
-          right: "0"
+          right: "0",
         },
         xAxis: {
           type: "category",
           boundaryGap: true,
-          data: data.hwXArea
+          data: data.hwXArea,
         },
         yAxis: {
-          type: "value"
+          type: "value",
         },
         series,
-        grid: { x: 25, y: 45, x2: 25, y2: 25 }
+        grid: { x: 25, y: 45, x2: 25, y2: 25 },
       };
 
       hwCharts.setOption(options);
@@ -1975,17 +1982,17 @@ export default {
             barWidth: 30,
             label: {
               show: true,
-              position: "inside",
+              // position: "inside",
               position: "insideBottom",
-              color: "#fff"
+              color: "#fff",
             },
             itemStyle: {
               borderRadius: [20, 20, 0, 0, 0],
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 { offset: 0, color: "#7AC8DA" },
-                { offset: 1, color: "#5B7BC1" }
-              ])
-            }
+                { offset: 1, color: "#5B7BC1" },
+              ]),
+            },
           },
           {
             name: "同期基数",
@@ -1993,36 +2000,36 @@ export default {
             smooth: true,
             data: [...data.chardata4],
             label: {
-              show: true
+              show: true,
             },
             itemStyle: {
-              color: "#AB043F"
-            }
-          }
+              color: "#AB043F",
+            },
+          },
         ];
 
         const options = {
           tooltip: {
-            trigger: "item"
+            trigger: "item",
           },
           legend: {
             show: true,
             orient: "horizontal",
-            right: "0"
+            right: "0",
           },
           xAxis: {
             type: "category",
             boundaryGap: true,
-            data: data.gdXArea
+            data: data.gdXArea,
           },
           yAxis: {
             type: "value",
             axisLabel: {
-              show: false
-            }
+              show: false,
+            },
           },
           series,
-          grid: { x: 25, y: 45, x2: 25, y2: 25 }
+          grid: { x: 25, y: 45, x2: 25, y2: 25 },
         };
 
         gdCharts.setOption(options);
@@ -2079,7 +2086,6 @@ export default {
       return new Promise((resolve) => setTimeout(resolve, 1500));
     };
     const getData = async () => {
-
       let arr = data.menuaudiolist;
       // console.log("arrdata.menuaudiolist", arr, arr.length);
       while (num < arr.length) {
@@ -2088,9 +2094,9 @@ export default {
             `FWDApex/znjbNew/getContentVoiceByDate?pdate=${data.selectdate}&pmenu=${arr[num].keyword}`,
             {
               headers: {
-                Authorization: `Bearer ${data.token}`
+                Authorization: `Bearer ${data.token}`,
               },
-              withCredentials: false
+              withCredentials: false,
             }
           )
           .then((res) => {
@@ -2186,8 +2192,12 @@ export default {
       console.log("音频播放结束了-index", index);
       console.log("音频播放结束了-menuaudiolist", data.menuaudiolist);
       // 滚动屏幕
-      let element = document.querySelector("#" + data.menuaudiolist[index+1].name) 
-      element == undefined ? null:element.scrollIntoView({ behavior: "smooth" })
+      let element = document.querySelector(
+        "#" + data.menuaudiolist[index + 1].name
+      );
+      element == undefined
+        ? null
+        : element.scrollIntoView({ behavior: "smooth" });
       let nextUrl = data.menuaudiolist[index + 1].url;
       // 移动
       if (nextUrl) {
@@ -2234,7 +2244,7 @@ export default {
           // console.log("ttsRecorder.IsRuns() ", ttsRecorder.IsRuns());
           if (ttsRecorder.IsRuns() === false) {
             ttsRecorder.setParams({
-              text: item.content
+              text: item.content,
             });
             if (
               ["init", "endPlay", "errorTTS"].indexOf(ttsRecorder.status) > -1
@@ -2344,7 +2354,7 @@ export default {
         title: title + "详情",
         message,
         confirmButtonColor: "#79BBFF",
-        messageAlign: Detail ? "left" : "center"
+        messageAlign: Detail ? "left" : "center",
       }).then(() => {
         // on close
       });
@@ -2353,12 +2363,12 @@ export default {
     //退出
     const exit = () => {
       dd.biz.navigation.close({
-        onSuccess: function(result) {
+        onSuccess: function (result) {
           console.log("result", result);
         },
-        onFail: function(err) {
+        onFail: function (err) {
           console.log("err", err);
-        }
+        },
       });
     };
 
@@ -2387,10 +2397,10 @@ export default {
       pages,
       getVoiceContentText,
       exit,
-      handleBeforePlay,
-      onAudioEnded
+      // handleBeforePlay,
+      onAudioEnded,
     };
-  }
+  },
 };
 </script>
 

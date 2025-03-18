@@ -3,8 +3,7 @@ import "babel-polyfill";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import Es6Promise from "es6-promise";
-require("es6-promise").polyfill();
-Es6Promise.polyfill();
+import "es6-promise/auto"; // 使用自动填充而不是手动调用
 import { createApp } from "vue";
 import App from "./App.vue";
 import {

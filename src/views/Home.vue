@@ -1827,9 +1827,9 @@ import TTSRecorder from "@/utils/TTSRecorder.js";
 export default {
   components: {
     ElConfigProvider,
-    userExit,
-    NoPermissions,
-    ArrowDown,
+    // userExit,
+    // NoPermissions,
+    // ArrowDown,
   },
   setup() {
     const ttsRecorder = new TTSRecorder();
@@ -2360,7 +2360,6 @@ export default {
             barWidth: 30,
             label: {
               show: true,
-              position: "inside",
               position: "insideBottom",
               color: "#fff",
             },
@@ -2457,9 +2456,12 @@ export default {
     cursor: pointer;
     color: #fff;
     background-image: url("@/assets/Image/lian_images/联想切图_42-69.png");
-    background-repeat: no-repeat; /* 不重复 */
-    background-size: 100% 100%; /* 覆盖整个元素 */
-    background-position: center center; /* 居中放置 */
+    background-repeat: no-repeat;
+    /* 不重复 */
+    background-size: 100% 100%;
+    /* 覆盖整个元素 */
+    background-position: center center;
+    /* 居中放置 */
     width: 60px;
     height: 35px;
     padding-top: 5px;
@@ -2816,9 +2818,12 @@ export default {
 
             .righttopimg {
               background-image: url("@/assets/Image/lian_images/联想切图_42-69.png");
-              background-repeat: no-repeat; /* 不重复 */
-              background-size: 100% 100%; /* 覆盖整个元素 */
-              background-position: center center; /* 居中放置 */
+              background-repeat: no-repeat;
+              /* 不重复 */
+              background-size: 100% 100%;
+              /* 覆盖整个元素 */
+              background-position: center center;
+              /* 居中放置 */
               width: 60px;
               height: 35px;
               position: absolute;
@@ -2841,9 +2846,12 @@ export default {
             .lefttopimg,
             .lefttopimg1 {
               background-image: url("@/assets/Image/lian_images/联想切图_99.png");
-              background-repeat: no-repeat; /* 不重复 */
-              background-size: 100% 100%; /* 覆盖整个元素 */
-              background-position: center center; /* 居中放置 */
+              background-repeat: no-repeat;
+              /* 不重复 */
+              background-size: 100% 100%;
+              /* 覆盖整个元素 */
+              background-position: center center;
+              /* 居中放置 */
               width: 70px;
               height: 35px;
               position: absolute;
@@ -2915,9 +2923,12 @@ export default {
 
           .lefttopimg1 {
             background-image: url("@/assets/Image/lian_images/联想切图_99.png");
-            background-repeat: no-repeat; /* 不重复 */
-            background-size: 100% 100%; /* 覆盖整个元素 */
-            background-position: center center; /* 居中放置 */
+            background-repeat: no-repeat;
+            /* 不重复 */
+            background-size: 100% 100%;
+            /* 覆盖整个元素 */
+            background-position: center center;
+            /* 居中放置 */
             // width: 200px;
             padding-right: 20px;
             height: 50px;
@@ -3078,8 +3089,10 @@ export default {
                   width: 200px;
                   height: 60px;
                   background-image: url("@/assets/Image/lian_images/联想切图_90.png");
-                  background-repeat: no-repeat; /* 不重复 */
-                  background-size: 100% 100%; /* 覆盖整个元素 */
+                  background-repeat: no-repeat;
+                  /* 不重复 */
+                  background-size: 100% 100%;
+                  /* 覆盖整个元素 */
                   font-size: 16px;
                   font-weight: bolder;
                   color: #0f7afd;
@@ -3122,8 +3135,10 @@ export default {
                 width: 45px;
                 height: 40px;
                 background-image: url("@/assets/Image/lian_images/联想切图_10.png");
-                background-repeat: no-repeat; /* 不重复 */
-                background-size: 100% 100%; /* 覆盖整个元素 */
+                background-repeat: no-repeat;
+                /* 不重复 */
+                background-size: 100% 100%;
+                /* 覆盖整个元素 */
                 margin-right: 5px;
                 margin-top: 5px;
               }
@@ -3220,8 +3235,10 @@ export default {
                 .keybm {
                   width: 45px;
                   height: 35px;
-                  background-repeat: no-repeat; /* 不重复 */
-                  background-size: 100% 100%; /* 覆盖整个元素 */
+                  background-repeat: no-repeat;
+                  /* 不重复 */
+                  background-size: 100% 100%;
+                  /* 覆盖整个元素 */
                   padding-left: 26px;
                   box-sizing: border-box;
                   white-space: nowrap;
